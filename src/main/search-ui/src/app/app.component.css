@@ -1,0 +1,13 @@
+.container{
+    margin-top: 100px;
+}
+
+.col-md-10{
+    padding: 0;
+}
+
+.dropdown-menu{
+    
+    left: 15;
+    width: 100%;
+}
