@@ -1,0 +1,42 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div class="container ">
+    <h1 class="text-center">
+      Acoustic Employee Search Engine
+    </h1>
+    <div class="position-relative input-group mb-3 col-md-10 m-auto">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
+      </div>
+      <input type="text" class="form-control search-engine_input" name="search-engine-input" [formControl]="searchEngine"
+        aria-label="Search engine input" aria-describedby="inputGroup-sizing-default">
+      <div class="dropdown-menu" [ngClass]="{'show' : userTopTenList}" aria-labelledby="dropdownMenuLink">
+        <a  *ngFor="let searchEngineItem of userTopTenList" (click)="getFirstPageResults(1)" class="dropdown-item" href="#">
+          {{searchEngineItem.firstName}} - {{searchEngineItem.address}}
+        </a>
+      </div>
+    </div>
+  
+  </div>
+  
+  
+  
+  <!-- <div *ngFor="let searchEngineItem of userTopTenList">
+    <a href="{{searchEngineItem.email}}"><br>
+      <div>
+        <cite>{{searchEngineItem.email}}
+          <span><span>{{searchEngineItem.firstName}}</span></span>
+        </cite>
+      </div>
+      <h3><span>{{searchEngineItem.address}}</span></h3>
+  
+    </a>
+    <div>
+      <span></span>
+    </div>
+  </div> -->
+  
+  <div class="pagination">
+  
+  </div>
+  

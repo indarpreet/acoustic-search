@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "USER_DATA")
@@ -73,6 +74,8 @@ public class UserDetails {
         this.address = address;
     }
 
+    
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -124,7 +127,5 @@ public class UserDetails {
         return "UserDetails [address=" + address + ", company=" + company + ", email=" + email + ", firstName="
                 + firstName + ", id=" + id + "]";
     }
-
-  
 
 }
