@@ -1,13 +1,18 @@
-.container{
-    margin-top: 100px;
+.search-tile{
+
+    padding: 10px;
 }
 
-.col-md-10{
-    padding: 0;
+.user-company{
+    color: #1a0dab;
 }
 
-.dropdown-menu{
-    
-    left: 15;
-    width: 100%;
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-selected{
+    color: black;
 }

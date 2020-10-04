@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+/* Style for search engine home page */
+
+
+
+hr{
+    margin : 0;
+}
+
+.container.home{
+    margin-top: 100px;
+}
+
+.col-md-10{
+    padding: 0;
+}
+
+.dropdown-menu{
+    
+    left: 15;
+    width: 100%;
+}
+
+.search-engine__container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-engine__container .search-btn{
+    margin-left: 10px;
+}
+
+.icon-close{
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    z-index: 3;
+}
+
+.search-engine_input:focus {
+    border: 1px solid #ced4da;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    outline: 0;
+    box-shadow: none;
+}
+
+.divider{
+ 
+    width: 100%;
+    height: 1px;
+    background-color: #ced4da;
+}
+
+.dropdown-menu hr:last-child{
+    display: none;
+}

@@ -1,0 +1,41 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div class="search-engine__container"  (clickOutside)="onClickedOutside($event)">
+    <div class="header">
+        <h1 class="text-center">
+            Employee Search Engine
+          </h1>
+    </div>
+ 
+  <div class="col-md-12 d-flex align-items-center justify-content-center">
+    <div class="position-relative input-group col-md-10">
+      <div class="input-group-prepend">
+        <button (click)="search()" class="btn btn-outline-secondary" type="button">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+
+      <input (keyup.enter)="search()" (focus)="showDropDown =true;" type="text" placeholder="Search..." class="form-control search-engine_input" name="search-engine-input"
+        [formControl]="searchEngine" aria-label="Search engine input" aria-describedby="inputGroup-sizing-default">
+      <span class="icon-close" (click)="close()" *ngIf="searchEngine.value && searchEngine.value.length > 0"><i
+          class="fa fa-times"></i></span>
+
+      <div class="dropdown-menu" [ngClass]="{'show' : showDropDown && userTopTenList}" aria-labelledby="dropdownMenuLink">
+        <ng-container *ngFor="let searchEngineItem of userTopTenList">
+          <a (click)="getFirstPageResults(1)" class="dropdown-item" href="#">
+            <div [innerHTML]="searchEngineItem.searchIndex"></div>
+          </a>
+         
+          <hr>
+        </ng-container>
+        <a *ngIf="userTopTenList && userTopTenList.length == 0" class="dropdown-item" href="#">
+            <div>No Results Found...</div>
+          </a>
+      </div>
+    </div>
+    <button (click)="search()" class="btn btn-primary search-btn">Search</button>
+  </div>
+
+
+
+</div>

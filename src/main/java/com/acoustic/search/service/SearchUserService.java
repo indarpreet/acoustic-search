@@ -18,6 +18,11 @@ public class SearchUserService {
     @Autowired
     UserRepository userRepository;
 
+
+    public int getTotalCount(String term){
+        return userRepository.getTotalCount(term);
+    }
+
     /***
      * 
      * @param searchTerm
@@ -30,8 +35,23 @@ public class SearchUserService {
      *     must be seen in the first page
      */
     public List<UserDetails> getUserDetails(SearchTerm searchTerm) {
-        List<UserDetails> userDetails = userRepository.findByFirstNameRegexAndAddressRegex(searchTerm.getTerm(),
+        List<UserDetails> userDetails = userRepository.findByFirstNameRegexAndAddressRegexAndCompanyRegex(searchTerm.getTerm(),
                 PageRequest.of(searchTerm.getPageNo(), 10, Sort.by("id").descending()));
+
+
+                userDetails.forEach(item -> {
+                    if(item.getFirstName().toLowerCase().indexOf(searchTerm.getTerm().toLowerCase()) > -1){
+                        item.setSearchIndex(item.getFirstName().toLowerCase());
+                    }
+
+                    if(item.getAddress().toLowerCase().indexOf(searchTerm.getTerm().toLowerCase()) > -1){
+                        item.setSearchIndex(item.getAddress().toLowerCase());
+                    }
+
+                    if(item.getCompany().toLowerCase().indexOf(searchTerm.getTerm().toLowerCase()) > -1){
+                        item.setSearchIndex(item.getCompany().toLowerCase());
+                    }
+                });
 
         /**
          * The search results are again sorted as per there alphabetical order first
@@ -48,8 +68,8 @@ public class SearchUserService {
             @Override
             public int compare(UserDetails o1, UserDetails o2) {
                 String sterm = searchTerm.getTerm().toLowerCase();
-                String s1 = o1.getFirstName().toLowerCase() + o1.getAddress().toLowerCase();
-                String s2 = o2.getFirstName().toLowerCase() + o2.getAddress().toLowerCase();
+                String s1= o1.getSearchIndex();
+                String s2 = o2.getSearchIndex();
                 int index1 = s1.indexOf(sterm);
                 int index2 = s2.indexOf(sterm);
                 if (index1 == index2) {

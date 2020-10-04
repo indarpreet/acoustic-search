@@ -20,6 +20,11 @@ public class UserDetails {
     @Column(name = "ADDRESS")
     private String address;
 
+    @Transient
+    private String searchIndex;
+
+    
+
     public UserDetails(){
 
     }
@@ -127,5 +132,16 @@ public class UserDetails {
         return "UserDetails [address=" + address + ", company=" + company + ", email=" + email + ", firstName="
                 + firstName + ", id=" + id + "]";
     }
+
+    public String getSearchIndex() {
+        return searchIndex;
+    }
+
+    public void setSearchIndex(String searchIndex) {
+        this.searchIndex = searchIndex;
+    }
+
+
+   
 
 }

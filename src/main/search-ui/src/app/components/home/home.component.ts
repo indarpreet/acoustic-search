@@ -1,15 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl } from "@angular/forms";
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-  switchMap,
-} from "rxjs/operators";
 import { SearchTerm } from 'src/app/models/SearchTerm';
 import { UserDetails } from 'src/app/models/UserDetails';
 import { SearchEngineService } from 'src/app/services/search-engine.service';
+
 
 @Component({
   selector: 'app-home',
@@ -18,56 +11,92 @@ import { SearchEngineService } from 'src/app/services/search-engine.service';
 })
 export class HomeComponent implements OnInit {
 
- 
-  searchEngineList = [1, 2, 3, 4, 5, 6];
-  searchEngine: FormControl = new FormControl();
-  userTopTenList: Array<UserDetails>;
-  searchTerm: SearchTerm;
-
-  constructor(private searchEngineService: SearchEngineService) {
-    this.searchTerm = new SearchTerm();
-  }
-
-  ngOnInit() {
-    /**
-     * Typeahead form control
-     */
-    const typeahead = this.searchEngine.valueChanges.pipe(
-      map((query) => {
-        return query.length > 0 ? query : this.userTopTenList = undefined;
-      }),
-      filter((query) => query),
-      debounceTime(1000),
-      distinctUntilChanged(),
-      switchMap((searchTerm) => {
-        this.searchTerm.term = searchTerm.toLowerCase();
-        this.searchTerm.pageNo = 0;
-        return this.getSearchResults();
+  searchPageResults : Array<UserDetails>;
+  home : boolean = true;
+  searchTerm : SearchTerm;
+  noOfPages : number;
+  listOfPages : Array<{id : number}> = [];
+  currentPage : number;
+  lowest : number;
+  highest : number;
+  constructor(private searchEngineService : SearchEngineService){}
+  ngOnInit(){
+     this.searchEngineService._searchPageResults.subscribe(next => {
+        this.searchPageResults =  next;
+        if(next){
+          this.home = false;
+        }
+      this.searchEngineService._totalPages.subscribe(next => {
+        this.pagination(next);
       })
-    );
-
-    typeahead.subscribe(
-      (response) => {
-        this.userTopTenList = response;
-      },
-      (error) => {}
-    );
+        
+     });
+     
   }
 
-  /**
+   /**
    * This method is called on click of page number
    */
-  getSearchResultsByPage(pageNo) {
-    this.searchTerm.pageNo = pageNo;
-    this.getSearchResults().subscribe(
+  getSearchResultsByPage(currentPage) {
+    this.searchTerm = SearchTerm.getSearchTermInstance();
+    this.currentPage = currentPage
+    this.searchTerm.pageNo = this.currentPage - 1;
+
+    if((currentPage < this.lowest || currentPage == this.lowest) && this.lowest != 1){ 
+     
+        this.listOfPages = [];
+        
+        this.highest = this.lowest;
+        this.lowest = this.lowest - 10;
+        if(this.lowest == 0){
+          this.lowest = 1;
+        }
+        for(let i = this.lowest ; i <= this.highest ; i++){
+          this.listOfPages.push({id : i});
+        }
+       
+
+    }else if(currentPage > this.highest || currentPage == this.highest){
+      this.listOfPages = [];
+      this.lowest = this.highest;
+      if(this.highest + 10 > this.noOfPages){
+        this.highest = this.noOfPages;
+      }else{
+        this.highest = this.highest + 10;
+      }
+      
+      for(let i = this.lowest ; i <= this.highest ; i++){
+        this.listOfPages.push({id : i});
+      }
+    }
+    
+    
+    this.searchEngineService.getSearchResults(this.searchTerm).subscribe(
       (response) => {
-        console.log("Next page results");
+        this.searchPageResults =  response;
       },
       (error) => {}
     );
   }
 
-  getSearchResults() {
-    return this.searchEngineService.getSearchResults(this.searchTerm);
+  
+
+  pagination(totalCount){
+    this.noOfPages = Math.ceil(totalCount / 10);
+    this.listOfPages = [];
+    if(this.noOfPages > 10){
+      this.lowest = 1;
+      this.highest = 10;
+      for(let i = 1 ; i <= 10 ; i++){
+        this.listOfPages.push({id : i});
+      }
+    }else{
+      for(let i = 1 ; i <= this.noOfPages ; i++){
+        this.listOfPages.push({id : i});
+      } 
+    }
+    
+    this.currentPage = 1;
+   
   }
 }

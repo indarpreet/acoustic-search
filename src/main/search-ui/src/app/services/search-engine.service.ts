@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { environment } from "../../environments/environment";
 import { SearchTerm } from "../models/SearchTerm";
 import { UserDetails } from "../models/UserDetails";
@@ -9,6 +9,10 @@ import { UserDetails } from "../models/UserDetails";
   providedIn: "root",
 })
 export class SearchEngineService {
+
+  public _searchPageResults = new Subject<Array<UserDetails>>();
+
+  public _totalPages =  new Subject<number>();
 
   constructor(private http: HttpClient) {}
 
@@ -19,10 +23,12 @@ export class SearchEngineService {
     );
   }
 
-  // getPageResults(searchTerm: SearchTerm): Observable<Array<UserDetails>> {
-  //   return this.http.post<Array<UserDetails>>(
-  //     environment.server_url + "search/next",
-  //     searchTerm
-  //   );
-  // }
+
+  getTotalCount(searchTerm: SearchTerm): Observable<number> {
+    return this.http.post<number>(
+      environment.server_url + "total-count",
+      searchTerm
+    );
+  }
+
 }

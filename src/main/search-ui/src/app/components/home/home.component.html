@@ -1,42 +1,29 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<div class="container" [ngClass]="{'home' :  home}">
+  <app-search-engine></app-search-engine>
 
-<div class="container ">
-    <h1 class="text-center">
-      Acoustic Employee Search Engine
-    </h1>
-    <div class="position-relative input-group mb-3 col-md-10 m-auto">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
-      </div>
-      <input type="text" class="form-control search-engine_input" name="search-engine-input" [formControl]="searchEngine"
-        aria-label="Search engine input" aria-describedby="inputGroup-sizing-default">
-      <div class="dropdown-menu" [ngClass]="{'show' : userTopTenList}" aria-labelledby="dropdownMenuLink">
-        <a  *ngFor="let searchEngineItem of userTopTenList" (click)="getFirstPageResults(1)" class="dropdown-item" href="#">
-          {{searchEngineItem.firstName}} - {{searchEngineItem.address}}
-        </a>
-      </div>
-    </div>
-  
-  </div>
-  
-  
-  
-  <!-- <div *ngFor="let searchEngineItem of userTopTenList">
-    <a href="{{searchEngineItem.email}}"><br>
+  <div *ngIf="searchPageResults" class="search-results__container">
+    <hr class="mt-5 mb-5">
+    <div class="row mb-3 search-tile" *ngFor="let searchEngineItem of searchPageResults">
       <div>
-        <cite>{{searchEngineItem.email}}
-          <span><span>{{searchEngineItem.firstName}}</span></span>
-        </cite>
+        <div>
+          <cite>{{searchEngineItem.firstName}} -
+            <span class="user-company">{{searchEngineItem.company}}</span>
+          </cite>
+        </div>
+        <h3>{{searchEngineItem.address}}</h3>
+
       </div>
-      <h3><span>{{searchEngineItem.address}}</span></h3>
-  
-    </a>
-    <div>
-      <span></span>
     </div>
-  </div> -->
-  
-  <div class="pagination">
-  
+
+    <div class="row pagination mb-5">
+      <a class="mr-2" href="#" *ngIf="currentPage > 1" (click)="getSearchResultsByPage(currentPage - 1)">Previous</a>
+       <div class="page-no">
+           <a [ngClass]="{'page-selected' : currentPage == page.id}" class="mr-2" href="#" (click)="getSearchResultsByPage(page.id)" *ngFor="let page of listOfPages; let i=index">{{page.id}}</a>
+       </div>
+       <a href="#" *ngIf="currentPage < noOfPages" (click)="getSearchResultsByPage(currentPage + 1)">Next</a>
+    </div>
+
   </div>
-  
+
+
+</div>

@@ -4,4 +4,5 @@ export class UserDetails {
     email :string;
     company : string;
     address : string;
+    searchIndex : string;
 }

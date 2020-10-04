@@ -24,6 +24,12 @@ public class SearchUserController {
     //     return searchUserService.getUserDetails();
     // }
 
+    @PostMapping(value="/total-count")
+    @CrossOrigin
+    public int getTotalCount(@RequestBody SearchTerm searchTerm){
+        return searchUserService.getTotalCount(searchTerm.getTerm());
+    }
+
     @PostMapping(value = "/search")
     @CrossOrigin
     public List<UserDetails> getUserDetails(@RequestBody SearchTerm searchTerm){
