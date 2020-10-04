@@ -75,7 +75,7 @@ export class SearchEngineComponent implements OnInit {
     if(this.searchEngine.value != ""){
       this.showDropDown =false; 
       this.getTotalCount();
-      this.searchTerm.term = this.searchEngine.value;
+      this.searchTerm.term = this.searchEngine.value.toLowerCase();
       this.getUserDetails();
     }
   }
@@ -96,6 +96,7 @@ export class SearchEngineComponent implements OnInit {
   getDataForEmployee(searchCriteria : string){
       this.showDropDown =false;
         this.searchEngine.patchValue(searchCriteria , {emitEvent : false});
+        this.searchTerm.term = this.searchEngine.value.toLowerCase();
         this.getTotalCount();
         this.getUserDetails();
   }

@@ -21,7 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 @ExtendWith(MockitoExtension.class)
-class ServiceTest {
+class SearchUserServiceTest {
 
 	@InjectMocks
 	SearchUserService searchUserService;
