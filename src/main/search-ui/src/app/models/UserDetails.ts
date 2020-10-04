@@ -5,4 +5,5 @@ export class UserDetails {
     company : string;
     address : string;
     searchIndex : string;
+    sortCriteria : string;
 }

@@ -1,9 +1,12 @@
 <div class="container" [ngClass]="{'home' :  home}">
   <app-search-engine></app-search-engine>
 
+
+  <hr *ngIf="searchPageResults" class="mt-5 mb-5">
+
   <div *ngIf="searchPageResults" class="search-results__container">
       <!-- <div>Total Records: {{totalCount}}</div> -->
-    <hr class="mt-5 mb-5">
+   
     <div class="row mb-3 search-tile" *ngFor="let searchEngineItem of searchPageResults">
       <div>
         <div>
@@ -11,7 +14,7 @@
             <span class="user-company">{{searchEngineItem.company}}</span>
           </cite>
         </div>
-        <h3>{{searchEngineItem.address}}</h3>
+        <h5>{{searchEngineItem.address}}</h5>
 
       </div>
     </div>

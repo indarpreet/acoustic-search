@@ -39,20 +39,26 @@ public class SearchUserService {
         List<UserDetails> userDetails = userRepository.findByFirstNameRegexAndAddressRegexAndCompanyRegex(searchTerm.getTerm(),
                 PageRequest.of(searchTerm.getPageNo(), 10, Sort.by("id").descending()));
 
-
+                // O(n) - 10 records each time
                 userDetails.forEach(item -> {
-                    if(item.getFirstName().toLowerCase().indexOf(searchTerm.getTerm().toLowerCase()) > -1){
-                        item.setSearchIndex(item.getFirstName().toLowerCase());
+                   int firstNameIndex =  item.getFirstName().toLowerCase().indexOf(searchTerm.getTerm().toLowerCase());
+                    if(firstNameIndex > -1){
+                        item.setSortCriteria(item.getFirstName().toLowerCase());
+                        item.setSearchIndex(item.getFirstName().toLowerCase().substring(firstNameIndex));
                     }
-
-                    if(item.getAddress().toLowerCase().indexOf(searchTerm.getTerm().toLowerCase()) > -1){
-                        item.setSearchIndex(item.getAddress().toLowerCase());
+                    int addressIndex = item.getAddress().toLowerCase().indexOf(searchTerm.getTerm().toLowerCase());
+                    if(addressIndex > -1){
+                        item.setSortCriteria(item.getAddress().toLowerCase());
+                        item.setSearchIndex(item.getAddress().toLowerCase().substring(addressIndex));
                     }
-
-                    if(item.getCompany().toLowerCase().indexOf(searchTerm.getTerm().toLowerCase()) > -1){
-                        item.setSearchIndex(item.getCompany().toLowerCase());
+                    int companyIndex = item.getCompany().toLowerCase().indexOf(searchTerm.getTerm().toLowerCase());
+                    if(companyIndex > -1){
+                        item.setSortCriteria(item.getCompany().toLowerCase());
+                        item.setSearchIndex(item.getCompany().toLowerCase().substring(companyIndex));
                     }
                 });
+
+                
 
         /**
          * The search results are again sorted as per there alphabetical order first

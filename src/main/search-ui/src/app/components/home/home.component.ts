@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
         
         this.highest = this.lowest;
         this.lowest = this.lowest - 10;
-        if(this.lowest == 0){
+        if(this.lowest <= 0){
           this.lowest = 1;
         }
         for(let i = this.lowest ; i <= this.highest ; i++){

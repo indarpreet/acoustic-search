@@ -1,3 +1,7 @@
+.container{
+    padding: 16px 0;
+}
+
 .search-tile{
 
     padding: 10px;
@@ -15,4 +19,8 @@
 
 .page-selected{
     color: black;
+}
+
+.search-results__container{
+    margin-left: 6%;
 }

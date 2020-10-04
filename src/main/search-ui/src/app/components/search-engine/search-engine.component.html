@@ -17,12 +17,13 @@
 
       <input (keyup.enter)="search()" (focus)="onFocus()" type="text" placeholder="Search..." class="form-control search-engine_input" name="search-engine-input"
         [formControl]="searchEngine" aria-label="Search engine input" aria-describedby="inputGroup-sizing-default">
-      <span class="icon-close" (click)="close()" *ngIf="searchEngine.value && searchEngine.value.length > 0"><i
+      <span class="icon-close" (click)="close()" *ngIf="!reloadToggle && searchEngine.value && searchEngine.value.length > 0"><i
           class="fa fa-times"></i></span>
+         <span *ngIf="reloadToggle" class="icon-refresh">  <i class="fa fa-refresh" aria-hidden="true"></i> </span> 
       <div class="dropdown-menu" [ngClass]="{'show' : showDropDown && userTopTenList}" aria-labelledby="dropdownMenuLink">
-        <ng-container *ngFor="let searchEngineItem of userTopTenList">
+        <ng-container *ngFor="let searchEngineItem of uniqueSearchIndex">
           <a (click)="getDataForEmployee(searchEngineItem)" class="dropdown-item" href="#">
-            <div [innerHTML]="searchEngineItem.searchIndex.replace(searchEngine.value , '<b>'+ searchEngine.value +'</b>')"></div>
+            <div [innerHTML]="searchEngineItem.replace(searchEngine.value , '<b>'+ searchEngine.value +'</b>')"></div>
           </a>
          
           <hr>

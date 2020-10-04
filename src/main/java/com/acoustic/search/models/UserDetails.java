@@ -23,6 +23,9 @@ public class UserDetails {
     @Transient
     private String searchIndex;
 
+    @Transient
+    private String sortCriteria;
+
     
 
     public UserDetails(){
@@ -139,6 +142,14 @@ public class UserDetails {
 
     public void setSearchIndex(String searchIndex) {
         this.searchIndex = searchIndex;
+    }
+
+    public String getSortCriteria() {
+        return sortCriteria;
+    }
+
+    public void setSortCriteria(String sortCriteria) {
+        this.sortCriteria = sortCriteria;
     }
 
 
