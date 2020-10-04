@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     }
     
     
-    this.searchEngineService.getSearchResults(this.searchTerm).subscribe(
+    this.searchEngineService.getUserDetails(this.searchTerm).subscribe(
       (response) => {
         this.searchPageResults =  response;
       },

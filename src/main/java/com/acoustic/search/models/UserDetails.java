@@ -26,6 +26,9 @@ public class UserDetails {
     @Transient
     private String sortCriteria;
 
+    @Transient
+    private int count;
+
     
 
     public UserDetails(){
@@ -150,6 +153,14 @@ public class UserDetails {
 
     public void setSortCriteria(String sortCriteria) {
         this.sortCriteria = sortCriteria;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
 

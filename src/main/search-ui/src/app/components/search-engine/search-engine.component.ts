@@ -54,14 +54,8 @@ export class SearchEngineComponent implements OnInit {
         
         this.userTopTenList = response;
         // Event already triggered and user is waiting for response.
-        this.getDistinctSearchCriteriaValues(this.userTopTenList);
-        if(this.fromSelectedCriteria){
-          this.searchEngineService._searchPageResults.next(this.userTopTenList);
-          this.fromSelectedCriteria = false;
-        }else{
-          this.showDropDown =true;
-        }
-       
+        //this.getDistinctSearchCriteriaValues(this.userTopTenList);
+        this.showDropDown =true;
       },
       (error) => {}
     );
@@ -69,7 +63,7 @@ export class SearchEngineComponent implements OnInit {
 
   getDistinctSearchCriteriaValues(userTopTenList : Array<UserDetails>){
     //const searchIndexes = userTopTenList.map(item => item.sortCriteria.substring(item.sortCriteria.indexOf(this.searchEngine.value)));
-    this.uniqueSearchIndex =  [...new Set(userTopTenList.map(item => item.searchIndex))];
+    //this.uniqueSearchIndex =  [...new Set(userTopTenList.map(item => item.searchIndex))];
   }
 
   close(){
@@ -81,7 +75,8 @@ export class SearchEngineComponent implements OnInit {
     if(this.searchEngine.value != ""){
       this.showDropDown =false; 
       this.getTotalCount();
-      this.searchEngineService._searchPageResults.next(this.userTopTenList);
+      this.searchTerm.term = this.searchEngine.value;
+      this.getUserDetails();
     }
   }
 
@@ -100,16 +95,17 @@ export class SearchEngineComponent implements OnInit {
 
   getDataForEmployee(searchCriteria : string){
       this.showDropDown =false;
-     
-      if(searchCriteria != this.searchEngine.value){
-        this.searchEngine.patchValue(searchCriteria);
-        this.fromSelectedCriteria = true;
+        this.searchEngine.patchValue(searchCriteria , {emitEvent : false});
         this.getTotalCount();
-      }else{
-        this.searchEngineService._searchPageResults.next(this.userTopTenList);
-      }
-     
+        this.getUserDetails();
+  }
 
+  getUserDetails(){
+    this.searchEngineService.getUserDetails(this.searchTerm).subscribe(response => {
+      this.searchEngineService._searchPageResults.next(response);
+    }, error => {
+
+    })
   }
 
   onFocus(){

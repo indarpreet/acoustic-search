@@ -9,7 +9,7 @@ import { UserDetails } from "../models/UserDetails";
   providedIn: "root",
 })
 export class SearchEngineService {
-
+ 
   public _searchPageResults = new Subject<Array<UserDetails>>();
 
   public _totalPages =  new Subject<number>();
@@ -30,5 +30,13 @@ export class SearchEngineService {
       searchTerm
     );
   }
+
+  getUserDetails(searchTerm: SearchTerm) {
+    return this.http.post<Array<UserDetails>>(
+      environment.server_url + "user-details",
+      searchTerm
+    );
+  }
+
 
 }
