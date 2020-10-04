@@ -75,7 +75,9 @@ export class HomeComponent implements OnInit {
       (response) => {
         this.searchPageResults =  response;
       },
-      (error) => {}
+      (error) => {
+        alert("error occured while fetching search results");
+      }
     );
   }
 

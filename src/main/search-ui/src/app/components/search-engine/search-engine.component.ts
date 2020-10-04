@@ -57,7 +57,9 @@ export class SearchEngineComponent implements OnInit {
         //this.getDistinctSearchCriteriaValues(this.userTopTenList);
         this.showDropDown =true;
       },
-      (error) => {}
+      (error) => {
+        console.log("error occured while fetching search results");
+      }
     );
   }
 
@@ -104,8 +106,8 @@ export class SearchEngineComponent implements OnInit {
   getUserDetails(){
     this.searchEngineService.getUserDetails(this.searchTerm).subscribe(response => {
       this.searchEngineService._searchPageResults.next(response);
-    }, error => {
-
+    },(error) => {
+      alert("error occured while fetching user details");
     })
   }
 
