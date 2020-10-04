@@ -1,0 +1,3 @@
+.input-group > .search-engine_input:focus{
+    z-index: unset;
+}

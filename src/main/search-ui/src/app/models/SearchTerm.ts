@@ -5,6 +5,7 @@ export class SearchTerm {
     pageNo : number;
     limit : number = 10;
     totalCount : number;
+    updateId : number;
     private static searchTerm = new SearchTerm();
     private constructor(){
        

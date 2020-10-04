@@ -19,18 +19,18 @@ export class HomeComponent implements OnInit {
   currentPage : number;
   lowest : number;
   highest : number;
+  totalCount : number;
   constructor(private searchEngineService : SearchEngineService){}
   ngOnInit(){
      this.searchEngineService._searchPageResults.subscribe(next => {
         this.searchPageResults =  next;
-        if(next){
-          this.home = false;
-        }
-      this.searchEngineService._totalPages.subscribe(next => {
-        this.pagination(next);
-      })
-        
+          this.home = false;        
      });
+
+     this.searchEngineService._totalPages.subscribe(next => {
+      this.totalCount = next;
+      this.pagination(next);
+    })
      
   }
 
@@ -82,6 +82,7 @@ export class HomeComponent implements OnInit {
   
 
   pagination(totalCount){
+    
     this.noOfPages = Math.ceil(totalCount / 10);
     this.listOfPages = [];
     if(this.noOfPages > 10){

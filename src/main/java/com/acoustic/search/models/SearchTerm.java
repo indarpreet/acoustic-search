@@ -6,6 +6,8 @@ public class SearchTerm {
 
     private int pageNo;
 
+    private int updateId;
+
     public String getTerm() {
         return term;
     }
@@ -21,5 +23,14 @@ public class SearchTerm {
     public void setPageNo(int pageNo) {
         this.pageNo = pageNo;
     }
+
+    public int getUpdateId() {
+        return updateId;
+    }
+
+    public void setUpdateId(int updateId) {
+        this.updateId = updateId;
+    }
+    
     
 }

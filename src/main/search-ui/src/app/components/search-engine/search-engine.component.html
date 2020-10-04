@@ -15,15 +15,14 @@
         </button>
       </div>
 
-      <input (keyup.enter)="search()" (focus)="showDropDown =true;" type="text" placeholder="Search..." class="form-control search-engine_input" name="search-engine-input"
+      <input (keyup.enter)="search()" (focus)="onFocus()" type="text" placeholder="Search..." class="form-control search-engine_input" name="search-engine-input"
         [formControl]="searchEngine" aria-label="Search engine input" aria-describedby="inputGroup-sizing-default">
       <span class="icon-close" (click)="close()" *ngIf="searchEngine.value && searchEngine.value.length > 0"><i
           class="fa fa-times"></i></span>
-
       <div class="dropdown-menu" [ngClass]="{'show' : showDropDown && userTopTenList}" aria-labelledby="dropdownMenuLink">
         <ng-container *ngFor="let searchEngineItem of userTopTenList">
-          <a (click)="getFirstPageResults(1)" class="dropdown-item" href="#">
-            <div [innerHTML]="searchEngineItem.searchIndex"></div>
+          <a (click)="getDataForEmployee(searchEngineItem)" class="dropdown-item" href="#">
+            <div [innerHTML]="searchEngineItem.searchIndex.replace(searchEngine.value , '<b>'+ searchEngine.value +'</b>')"></div>
           </a>
          
           <hr>

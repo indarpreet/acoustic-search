@@ -20,7 +20,8 @@ public class SearchUserService {
 
 
     public int getTotalCount(String term){
-        return userRepository.getTotalCount(term);
+        int totalCount = userRepository.getTotalCount(term);
+        return totalCount ;
     }
 
     /***

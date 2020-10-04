@@ -2,6 +2,7 @@
   <app-search-engine></app-search-engine>
 
   <div *ngIf="searchPageResults" class="search-results__container">
+      <!-- <div>Total Records: {{totalCount}}</div> -->
     <hr class="mt-5 mb-5">
     <div class="row mb-3 search-tile" *ngFor="let searchEngineItem of searchPageResults">
       <div>
