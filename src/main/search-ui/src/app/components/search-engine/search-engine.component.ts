@@ -53,8 +53,6 @@ export class SearchEngineComponent implements OnInit {
       (response) => {
         
         this.userTopTenList = response;
-        // Event already triggered and user is waiting for response.
-        //this.getDistinctSearchCriteriaValues(this.userTopTenList);
         this.showDropDown =true;
       },
       (error) => {
@@ -73,6 +71,9 @@ export class SearchEngineComponent implements OnInit {
     this.showDropDown =true;
   }
 
+  /**
+   * Search for top 10 most prority data
+   */
   search(){ 
     if(this.searchEngine.value != ""){
       this.showDropDown =false; 
@@ -88,6 +89,9 @@ export class SearchEngineComponent implements OnInit {
      this.showDropDown =false; 
   }
 
+  /**
+   * get Total count of the results
+   */
   getTotalCount(){
 
     this.searchTerm.term = this.searchEngine.value.toLowerCase();
@@ -96,7 +100,10 @@ export class SearchEngineComponent implements OnInit {
       this.searchEngineService._totalPages.next(response);
     });
   }
-
+  /**
+   * On click of a dropdown selection
+   * @param searchCriteria 
+   */
   getDataForEmployee(searchCriteria : string){
       this.showDropDown =false;
         this.searchEngine.patchValue(searchCriteria , {emitEvent : false});
@@ -105,6 +112,9 @@ export class SearchEngineComponent implements OnInit {
         this.getUserDetails();
   }
 
+  /**
+   * get User Details for the entire page common method
+   */
   getUserDetails(){
     this.searchEngineService.getUserDetails(this.searchTerm).subscribe(response => {
       this.searchEngineService._searchPageResults.next(response);

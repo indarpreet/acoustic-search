@@ -24,6 +24,11 @@ public class SearchUserController {
 
     Logger logger = LoggerFactory.getLogger(SearchUserController.class);
 
+    /**
+     * This method is called for each key stroke of search engine
+     * @param searchTerm
+     * @return {@link List} of {@link UserDetails}
+     */
     @PostMapping(value = "/search")
     @CrossOrigin
     public ResponseEntity<List<UserDetails>> getDropDownResults(@RequestBody SearchTerm searchTerm){
@@ -38,7 +43,11 @@ public class SearchUserController {
     }
 
 
-    
+    /**
+     * The method is to get all the employees/user for selected criteria in search engine
+     * @param searchTerm
+     * @return {@link List} of {@link UserDetails}
+     */
     @PostMapping(value = "/user-details")
     @CrossOrigin
     public ResponseEntity<List<UserDetails>> getUserDetails(@RequestBody SearchTerm searchTerm){
@@ -52,7 +61,11 @@ public class SearchUserController {
         
     }
 
-
+    /**
+     * Get total count of search results
+     * @param searchTerm
+     * @return int
+     */
     @PostMapping(value="/total-count")
     @CrossOrigin
     public ResponseEntity<Integer> getTotalCount(@RequestBody SearchTerm searchTerm){
