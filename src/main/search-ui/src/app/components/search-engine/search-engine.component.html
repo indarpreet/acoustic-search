@@ -2,7 +2,7 @@
 
 <div class="search-engine__container"  (clickOutside)="onClickedOutside($event)">
     <div class="header">
-        <h1 class="text-center">
+        <h1 class="text-center title">
             Employee Search Engine
           </h1>
     </div>
@@ -15,7 +15,7 @@
         </button>
       </div>
 
-      <input (keyup.enter)="search()" (focus)="onFocus()" type="text" placeholder="Search..." class="form-control search-engine_input" name="search-engine-input"
+      <input #smartSearch (keyup.enter)="search()" (focus)="onFocus()" type="text" placeholder="Search..." class="form-control search-engine_input" name="search-engine-input"
         [formControl]="searchEngine" aria-label="Search engine input" aria-describedby="inputGroup-sizing-default">
       <span class="icon-close" (click)="close()" *ngIf="!reloadToggle && searchEngine.value && searchEngine.value.length > 0"><i
           class="fa fa-times"></i></span>

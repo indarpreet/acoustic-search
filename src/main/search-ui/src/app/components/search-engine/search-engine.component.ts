@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { Router } from '@angular/router';
 import {
-  debounceTime,
   distinctUntilChanged,
   filter,
   map,
@@ -26,6 +25,7 @@ export class SearchEngineComponent implements OnInit {
   fromSelectedCriteria : boolean;
   uniqueSearchIndex : Array<string>;
   eventTriggerd : {searchTerm : string , searchEvent : boolean};
+  @ViewChild('smartSearch' , {static : true}) smartSearchRef : ElementRef;
 
   constructor(private route : Router  , private searchEngineService: SearchEngineService) {
     this.searchTerm = SearchTerm.getSearchTermInstance();
@@ -79,6 +79,8 @@ export class SearchEngineComponent implements OnInit {
       this.getTotalCount();
       this.searchTerm.term = this.searchEngine.value.toLowerCase();
       this.getUserDetails();
+      this.smartSearchRef.nativeElement.blur();
+
     }
   }
 

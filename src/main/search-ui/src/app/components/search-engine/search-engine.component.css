@@ -1,3 +1,13 @@
 .input-group > .search-engine_input:focus{
     z-index: unset;
 }
+
+.title{
+    color: #555555;
+}
+
+.dropdown-menu.show{
+    display: block;
+    top: 36px;
+    border-top: 0;
+}
