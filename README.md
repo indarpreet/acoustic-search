@@ -9,5 +9,4 @@ Search as following advantages:
  - Alphabetical order search
  - fast access to results
  - Pagination
- - Simple and easy UI 
- - Look and feel
+ - Simple and easy UI
