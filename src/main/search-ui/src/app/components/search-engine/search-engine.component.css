@@ -10,4 +10,5 @@
     display: block;
     top: 36px;
     border-top: 0;
+    padding-top: unset;
 }
