@@ -1,9 +1,4 @@
-package com.acoustic.search;
-
-import com.acoustic.search.controller.SearchUserController;
-import com.acoustic.search.models.SearchTerm;
-import com.acoustic.search.models.UserDetails;
-import com.acoustic.search.service.SearchUserService;
+package com.engine.search;
 
 import org.springframework.http.MediaType;
 import org.junit.jupiter.api.Test;
@@ -21,6 +16,11 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.Arrays;
+
+import com.engine.search.controller.SearchUserController;
+import com.engine.search.models.SearchTerm;
+import com.engine.search.models.UserDetails;
+import com.engine.search.service.SearchUserService;
 
 @WebMvcTest(SearchUserController.class)
 public class SearchUserControllerTest {

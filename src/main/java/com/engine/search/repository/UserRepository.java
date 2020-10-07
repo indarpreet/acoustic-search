@@ -1,9 +1,8 @@
-package com.acoustic.search.repository;
+package com.engine.search.repository;
 
 import java.util.List;
 
-import com.acoustic.search.models.UserDetails;
-
+import com.engine.search.models.UserDetails;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;

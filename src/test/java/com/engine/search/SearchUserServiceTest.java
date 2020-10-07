@@ -1,4 +1,4 @@
-package com.acoustic.search;
+package com.engine.search;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -7,10 +7,10 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.acoustic.search.models.SearchTerm;
-import com.acoustic.search.models.UserDetails;
-import com.acoustic.search.repository.UserRepository;
-import com.acoustic.search.service.SearchUserService;
+import com.engine.search.models.SearchTerm;
+import com.engine.search.models.UserDetails;
+import com.engine.search.repository.UserRepository;
+import com.engine.search.service.SearchUserService;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

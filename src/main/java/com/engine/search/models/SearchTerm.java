@@ -1,4 +1,4 @@
-package com.acoustic.search.models;
+package com.engine.search.models;
 
 public class SearchTerm {
 

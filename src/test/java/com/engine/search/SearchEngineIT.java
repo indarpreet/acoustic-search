@@ -1,9 +1,9 @@
-package com.acoustic.search;
+package com.engine.search;
 
 import java.util.List;
 
-import com.acoustic.search.models.SearchTerm;
-import com.acoustic.search.models.UserDetails;
+import com.engine.search.models.SearchTerm;
+import com.engine.search.models.UserDetails;
 
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;

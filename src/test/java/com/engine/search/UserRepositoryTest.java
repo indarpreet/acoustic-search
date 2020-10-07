@@ -1,4 +1,4 @@
-package com.acoustic.search;
+package com.engine.search;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,8 +8,8 @@ import static org.mockito.ArgumentMatchers.isNull;
 
 import java.util.List;
 
-import com.acoustic.search.models.UserDetails;
-import com.acoustic.search.repository.UserRepository;
+import com.engine.search.models.UserDetails;
+import com.engine.search.repository.UserRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

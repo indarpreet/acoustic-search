@@ -1,10 +1,10 @@
-package com.acoustic.search.controller;
+package com.engine.search.controller;
 
 import java.util.List;
 
-import com.acoustic.search.models.SearchTerm;
-import com.acoustic.search.models.UserDetails;
-import com.acoustic.search.service.SearchUserService;
+import com.engine.search.models.SearchTerm;
+import com.engine.search.models.UserDetails;
+import com.engine.search.service.SearchUserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
