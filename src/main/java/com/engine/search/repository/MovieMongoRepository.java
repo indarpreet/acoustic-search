@@ -1,16 +1,12 @@
 package com.engine.search.repository;
+
+import com.engine.search.entity.Movie;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-import com.engine.search.models.UserDetails;
-
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.mongodb.repository.MongoRepository;
-
 @Repository
-public interface UserMongoRepository extends MongoRepository<UserDetails, Integer>  {
+public interface MovieMongoRepository extends MongoRepository<Movie, Integer>  {
 
 
     

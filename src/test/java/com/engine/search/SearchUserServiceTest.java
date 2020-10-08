@@ -1,14 +1,13 @@
 package com.engine.search;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.engine.search.entity.UserDetails;
 import com.engine.search.models.SearchTerm;
-import com.engine.search.models.UserDetails;
 import com.engine.search.repository.UserRepository;
 import com.engine.search.service.SearchUserService;
 

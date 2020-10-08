@@ -2,8 +2,8 @@ package com.engine.search.controller;
 
 import java.util.List;
 
+import com.engine.search.entity.UserDetails;
 import com.engine.search.models.SearchTerm;
-import com.engine.search.models.UserDetails;
 import com.engine.search.service.SearchUserService;
 
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.engine.search.models;
+package com.engine.search.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

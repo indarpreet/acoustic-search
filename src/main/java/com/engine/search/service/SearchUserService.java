@@ -3,13 +3,12 @@ package com.engine.search.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.engine.search.entity.UserDetails;
 import com.engine.search.models.SearchTerm;
-import com.engine.search.models.UserDetails;
 import com.engine.search.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

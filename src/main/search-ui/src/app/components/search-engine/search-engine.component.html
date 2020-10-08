@@ -1,15 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-<div class="search-engine__container"  (clickOutside)="onClickedOutside($event)">
-    <div class="header">
-        <h1 class="text-center title">
-            Employee Search Engine
-          </h1>
-    </div>
- 
+<div class="search-engine__container">
+  <div class="header">
+    <h1 class="text-center title">
+      Employee Search Engine
+    </h1>
+  </div>
+
   <div class="col-md-12 d-flex align-items-center justify-content-center">
-    <div class="position-relative input-group col-md-10">
-      <div class="input-group-prepend">
+    <!-- <div class="position-relative input-group col-md-10"> -->
+    <!-- <div class="input-group-prepend">
         <button (click)="search()" class="btn btn-outline-secondary" type="button">
           <i class="fa fa-search"></i>
         </button>
@@ -30,9 +30,34 @@
         <a *ngIf="userTopTenList && userTopTenList.length == 0" class="dropdown-item" href="#">
             <div>No Results Found...</div>
           </a>
-      </div>
-    </div>
-    <button (click)="search()" class="btn btn-primary search-btn">Search</button>
+      </div> -->
+    <mat-form-field class="position-relative input-group col-md-10">
+      <mat-label>Search...</mat-label>
+      <input type="text"
+      (keyup.enter)="search()" (focus)="onFocus()"
+    
+        aria-label="search-engine-input"
+        matInput
+        [formControl]="searchEngine"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let searchEngineItem of userTopTenList"
+          [value]="searchEngineItem.searchIndex.toLowerCase()">
+          <div (click)="getDataForEmployee(searchEngineItem.searchIndex.toLowerCase())" href="#">
+            <div [innerHTML]="searchEngineItem.searchIndex.replace(searchEngine.value.toLowerCase() , '<b>'+ searchEngine.value.toLowerCase() +'</b>')"></div>
+          </div>
+          <div *ngIf="userTopTenList && userTopTenList.length == 0" href="#">
+            <div>No Results Found...</div>
+          </div>
+        </mat-option>
+      </mat-autocomplete>
+     
+    </mat-form-field>
+
+    <button class="search-btn" (click)="search()" mat-raised-button color="primary">Search</button>
+    <!-- </div> -->
+    
+    <!-- <button  class="btn btn-primary search-btn">Search</button> -->
   </div>
 
 

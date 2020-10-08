@@ -1,13 +1,14 @@
-<div class="container" [ngClass]="{'home' :  home}">
+<div class="container" [ngClass]="{'home' : home}">
   <app-search-engine></app-search-engine>
 
 
   <hr *ngIf="searchPageResults" class="mt-5 mb-5">
 
   <div *ngIf="searchPageResults" class="search-results__container">
-      <!-- <div>Total Records: {{totalCount}}</div> -->
-   
-    <div class="row mb-3 search-tile" *ngFor="let searchEngineItem of searchPageResults">
+    <!-- <div>Total Records: {{totalCount}}</div> -->
+
+    <div class="row mb-3 search-tile" *ngFor="let searchEngineItem of
+      searchPageResults">
       <div>
         <div>
           <cite>{{searchEngineItem.firstName}} -
@@ -19,13 +20,21 @@
       </div>
     </div>
 
-    <div class="row pagination mb-5">
-      <a class="mr-2" href="#" *ngIf="currentPage > 1" (click)="getSearchResultsByPage(currentPage - 1)">Previous</a>
-       <div class="page-no">
-           <a [ngClass]="{'page-selected' : currentPage == page.id}" class="mr-2" href="#" (click)="getSearchResultsByPage(page.id)" *ngFor="let page of listOfPages; let i=index">{{page.id}}</a>
-       </div>
-       <a href="#" *ngIf="currentPage < noOfPages" (click)="getSearchResultsByPage(currentPage + 1)">Next</a>
-    </div>
+    <!-- <div class="row pagination mb-5">
+      <a class="mr-2" href="#" *ngIf="currentPage> 1"
+        (click)="getSearchResultsByPage(currentPage - 1)">Previous</a>
+      <div class="page-no">
+        <a [ngClass]="{'page-selected' : currentPage == page.id}" class="mr-2"
+          href="#" (click)="getSearchResultsByPage(page.id)" *ngFor="let page of
+          listOfPages; let i=index">{{page.id}}</a>
+      </div>
+      <a href="#" *ngIf="currentPage <noOfPages"
+        (click)="getSearchResultsByPage(currentPage + 1)">Next</a>
+    </div> -->
+    <mat-paginator [length]="totalCount"
+      [pageSize]="10"
+      (page)="pageEvent($event)">
+    </mat-paginator>
 
   </div>
 

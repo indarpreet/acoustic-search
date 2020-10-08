@@ -11,6 +11,7 @@ import { SearchTerm } from 'src/app/models/SearchTerm';
 import { UserDetails } from 'src/app/models/UserDetails';
 import { SearchEngineService } from 'src/app/services/search-engine.service';
 
+
 @Component({
   selector: 'app-search-engine',
   templateUrl: './search-engine.component.html',
@@ -21,13 +22,13 @@ export class SearchEngineComponent implements OnInit {
   searchEngine: FormControl = new FormControl();
   userTopTenList: Array<UserDetails>;
   searchTerm: SearchTerm;
-  showDropDown : boolean;
-  fromSelectedCriteria : boolean;
-  uniqueSearchIndex : Array<string>;
-  eventTriggerd : {searchTerm : string , searchEvent : boolean};
-  @ViewChild('smartSearch' , {static : true}) smartSearchRef : ElementRef;
+  showDropDown: boolean;
+  fromSelectedCriteria: boolean;
+  uniqueSearchIndex: Array<string>;
+  eventTriggerd: { searchTerm: string, searchEvent: boolean };
+  @ViewChild('smartSearch', { static: true }) smartSearchRef: ElementRef;
 
-  constructor(private route : Router  , private searchEngineService: SearchEngineService) {
+  constructor(private route: Router, private searchEngineService: SearchEngineService) {
     this.searchTerm = SearchTerm.getSearchTermInstance();
   }
 
@@ -37,7 +38,7 @@ export class SearchEngineComponent implements OnInit {
      */
     const typeahead = this.searchEngine.valueChanges.pipe(
       map((query) => {
-        this.eventTriggerd = { searchEvent : false , searchTerm :  this.searchEngine.value};
+        this.eventTriggerd = { searchEvent: false, searchTerm: this.searchEngine.value };
         return query.length > 0 ? query : false;
       }),
       filter((query) => query),
@@ -51,9 +52,9 @@ export class SearchEngineComponent implements OnInit {
 
     typeahead.subscribe(
       (response) => {
-        
+
         this.userTopTenList = response;
-        this.showDropDown =true;
+        this.showDropDown = true;
       },
       (error) => {
         console.log("error occured while fetching search results");
@@ -61,22 +62,22 @@ export class SearchEngineComponent implements OnInit {
     );
   }
 
-  getDistinctSearchCriteriaValues(userTopTenList : Array<UserDetails>){
+  getDistinctSearchCriteriaValues(userTopTenList: Array<UserDetails>) {
     //const searchIndexes = userTopTenList.map(item => item.sortCriteria.substring(item.sortCriteria.indexOf(this.searchEngine.value)));
     //this.uniqueSearchIndex =  [...new Set(userTopTenList.map(item => item.searchIndex))];
   }
 
-  close(){
+  close() {
     this.searchEngine.patchValue("");
-    this.showDropDown =true;
+    this.showDropDown = true;
   }
 
   /**
    * Search for top 10 most prority data
    */
-  search(){ 
-    if(this.searchEngine.value != ""){
-      this.showDropDown =false; 
+  search() {
+    if (this.searchEngine.value != "") {
+      this.showDropDown = false;
       this.getTotalCount();
       this.searchTerm.term = this.searchEngine.value.toLowerCase();
       this.getUserDetails();
@@ -85,18 +86,18 @@ export class SearchEngineComponent implements OnInit {
     }
   }
 
-  onClickedOutside(event){
-     this.showDropDown =false; 
+  onClickedOutside(event) {
+    this.showDropDown = false;
   }
 
   /**
    * get Total count of the results
    */
-  getTotalCount(){
+  getTotalCount() {
 
     this.searchTerm.term = this.searchEngine.value.toLowerCase();
     this.searchTerm.pageNo = 0;
-    this.searchEngineService.getTotalCount(this.searchTerm).subscribe(response =>{
+    this.searchEngineService.getTotalCount(this.searchTerm).subscribe(response => {
       this.searchEngineService._totalPages.next(response);
     });
   }
@@ -104,26 +105,26 @@ export class SearchEngineComponent implements OnInit {
    * On click of a dropdown selection
    * @param searchCriteria 
    */
-  getDataForEmployee(searchCriteria : string){
-      this.showDropDown =false;
-        this.searchEngine.patchValue(searchCriteria , {emitEvent : false});
-        this.searchTerm.term = this.searchEngine.value.toLowerCase();
-        this.getTotalCount();
-        this.getUserDetails();
+  getDataForEmployee(searchCriteria: string) {
+    this.showDropDown = false;
+    this.searchEngine.patchValue(searchCriteria, { emitEvent: false });
+    this.searchTerm.term = this.searchEngine.value.toLowerCase();
+    this.getTotalCount();
+    this.getUserDetails();
   }
 
   /**
    * get User Details for the entire page common method
    */
-  getUserDetails(){
+  getUserDetails() {
     this.searchEngineService.getUserDetails(this.searchTerm).subscribe(response => {
       this.searchEngineService._searchPageResults.next(response);
-    },(error) => {
+    }, (error) => {
       alert("error occured while fetching user details");
     })
   }
 
-  onFocus(){
-    this.showDropDown =true;
+  onFocus() {
+    this.showDropDown = true;
   }
 }
