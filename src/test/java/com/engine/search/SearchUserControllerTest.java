@@ -18,8 +18,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 
 import com.engine.search.controller.SearchUserController;
+import com.engine.search.entity.UserDetails;
 import com.engine.search.models.SearchTerm;
-import com.engine.search.models.UserDetails;
 import com.engine.search.service.SearchUserService;
 
 @WebMvcTest(SearchUserController.class)
@@ -32,15 +32,13 @@ public class SearchUserControllerTest {
     SearchUserService searchUserService;
 
     @Test
-    public void getUserDetails() throws Exception{
-        
-        when(searchUserService.getDropDownResults(any(SearchTerm.class))).
-        thenReturn( Arrays.asList(
-            new UserDetails(237, "Dane", "massa@convallis.org" , "Et Magna Praesent LLC", "Ap #904-5634 Suspendisse St.")));
-        
-        RequestBuilder request = MockMvcRequestBuilders.post("/search").accept(MediaType.APPLICATION_JSON )
-        .content("{\"term\":\"dan\" , \"pageNo\":0}")
-        .contentType(MediaType.APPLICATION_JSON);
+    public void getUserDetails() throws Exception {
+
+        when(searchUserService.getDropDownResults(any(SearchTerm.class))).thenReturn(Arrays.asList(new UserDetails(237,
+                "Dane", "massa@convallis.org", "Et Magna Praesent LLC", "Ap #904-5634 Suspendisse St.")));
+
+        RequestBuilder request = MockMvcRequestBuilders.post("/search").accept(MediaType.APPLICATION_JSON)
+                .content("{\"term\":\"dan\" , \"pageNo\":0}").contentType(MediaType.APPLICATION_JSON);
 
         MvcResult mvcResult = mockMvc.perform(request)
                 // perform request and check status
@@ -51,5 +49,5 @@ public class SearchUserControllerTest {
                 // return the object
                 .andReturn();
     }
-    
+
 }

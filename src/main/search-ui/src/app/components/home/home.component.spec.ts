@@ -8,9 +8,9 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [HomeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,4 +22,9 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should check if cite tag contains proper values', () => {
+  //   const compiled = fixture.debugElement.nativeElement;
+  //   expect(compiled.querySelector('cite').textContent).toContain
+  // });
 });

@@ -8,7 +8,7 @@ import static org.mockito.ArgumentMatchers.isNull;
 
 import java.util.List;
 
-import com.engine.search.models.UserDetails;
+import com.engine.search.entity.UserDetails;
 import com.engine.search.repository.UserRepository;
 
 import org.junit.jupiter.api.Test;
@@ -18,14 +18,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 @DataJpaTest
 public class UserRepositoryTest {
     @Autowired
+    
     UserRepository userRepository;
 
-
     @Test
-    public void findAll(){
-       List<UserDetails>  items = userRepository.getDropDownResults("dan");
-       assertNotNull(items);
-       assertFalse(items.isEmpty());
+    public void findAll() {
+        List<UserDetails> items = userRepository.getDropDownResults("dan");
+        assertNotNull(items);
+        assertFalse(items.isEmpty());
     }
 }
-

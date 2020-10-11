@@ -1,13 +1,8 @@
 package com.engine.search.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.engine.search.entity.Movie;
-import com.engine.search.repository.MovieMongoRepository;
-
-import org.aspectj.weaver.patterns.TypePattern.MatchKind;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -20,20 +15,19 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MovieService {
-
-    @Autowired
-    MovieMongoRepository movieMongoRepository;
+public class PersonService {
 
     @Autowired
     MongoTemplate mongoTemplate;
 
-    public List<Movie> getMovies() {
-        return getMoviesFromTemplate();
+    public List<Map> getPersonGroupByGender() {
+        MatchOperation matchOperation = Aggregation.match(Criteria.where("dob.age").gt(50));
+        GroupOperation groupOperation = Aggregation.group("$gender").count().as("totalPersonsPerGender").avg("$dob.age")
+                .as("avg");
+        SortOperation sortOperation = Aggregation.sort(Direction.DESC, "totalPersonsPerGender");
+        Aggregation aggregation = Aggregation.newAggregation(matchOperation, groupOperation, sortOperation);
+        AggregationResults<Map> response = mongoTemplate.aggregate(aggregation, "persons", Map.class);
+        System.out.println(response.getMappedResults());
+        return response.getMappedResults();
     }
-
-    public List<Movie> getMoviesFromTemplate() {
-        return mongoTemplate.findAll(Movie.class);
-    }
-
 }
