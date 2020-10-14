@@ -9,7 +9,7 @@
 
     <div class="row mb-3 search-tile" *ngFor="let searchEngineItem of
       searchPageResults">
-      <div>
+      <a [routerLink]="['/employee-details']">
         <div>
           <cite>{{searchEngineItem.firstName}} -
             <span class="user-company">{{searchEngineItem.company}}</span>
@@ -17,7 +17,7 @@
         </div>
         <h5>{{searchEngineItem.address}}</h5>
 
-      </div>
+      </a>
     </div>
 
     <!-- <div class="row pagination mb-5">

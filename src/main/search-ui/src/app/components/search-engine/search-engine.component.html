@@ -33,7 +33,7 @@
       </div> -->
     <mat-form-field class="position-relative input-group col-md-10">
       <mat-label>Search...</mat-label>
-      <input type="text"
+      <input #smartSearch type="text"
       (keyup.enter)="search()" (focus)="onFocus()"
     
         aria-label="search-engine-input"

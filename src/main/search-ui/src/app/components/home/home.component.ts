@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from "@angular/core";
 import { PageEvent } from '@angular/material';
 import { SearchTerm } from 'src/app/models/SearchTerm';
 import { UserDetails } from 'src/app/models/UserDetails';
@@ -10,7 +10,7 @@ import { SearchEngineService } from 'src/app/services/search-engine.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   searchPageResults: Array<UserDetails>;
   home: boolean = true;
@@ -36,8 +36,12 @@ export class HomeComponent implements OnInit {
       this.pagination(next);
     })
 
-
   }
+
+
+  ngAfterViewInit() {
+  }
+
 
   pageEvent(event) {
     this.searchTerm = SearchTerm.getSearchTermInstance();
